@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ShiftMobile</string>
+
+    <string name="top_title">Введите BIN банковской карты:</string>
+    <string name="find_title">Поиск</string>
+
+    <string name="scheme_title">SCHEME/NETWORK</string>
+    <string name="type_title">TYPE</string>
+    <string name="bank_title">BANK</string>
+    <string name="brand_title">BRAND</string>
+    <string name="prepaid_title">PREPAID</string>
+    <string name="card_number_title">CARD NUMBER</string>
+    <string name="lenght_title">LENGTH</string>
+    <string name="luhn_title">LUHN</string>
+    <string name="country_title">COUNTRY</string>
+    <string name="latitude_title">latitude</string>
+    <string name="longitude_title">longitude</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="bot_nav_action_1">Home</string>
+    <string name="bot_nav_action_2">History</string>
+    <string name="bot_nav_action_3">Settings</string>
+
+    <string name="history_top_title">HISTORY</string>
+</resources>
