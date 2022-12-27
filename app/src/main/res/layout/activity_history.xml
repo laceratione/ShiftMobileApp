@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="historyViewModel"
-            type="com.example.shiftmobile.presentation.historypage.HistoryViewModel" />
+            name="binViewModel"
+            type="com.example.shiftmobile.presentation.homepage.BINViewModel" />
     </data>
 
     <LinearLayout
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:onClick="@{()->historyViewModel.startJob()}"
+                android:onClick="@{()->binViewModel.startJobClear()}"
                 android:id="@+id/clearHistory"
                 android:layout_gravity="center"
                 android:layout_width="20dp"
@@ -39,7 +39,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            app:setAdapter="@{historyViewModel.dataLive}"
+            app:setAdapter="@{binViewModel.dataLive}"
             android:layout_marginTop="20dp"
             android:id="@+id/rvHistory"
             android:layout_width="match_parent"

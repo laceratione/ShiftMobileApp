@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class BINViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BINViewModel::class.java)) {
             return BINViewModel(application) as T
         }

@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class BINViewModel(application: Application): ViewModel() {
+class BINViewModel(application: Application) : ViewModel() {
     //данные банковской карты
     private val cardInfo: MutableLiveData<CardInfo> = MutableLiveData()
     val cardInfoLive: LiveData<CardInfo> = cardInfo
@@ -45,6 +45,10 @@ class BINViewModel(application: Application): ViewModel() {
     //проверка процесса загрузки данных
     val isCardInfoLoading: MutableLiveData<Boolean> = MutableLiveData()
 
+    //история запросов
+    private val data: MutableLiveData<List<HistoryEntity>> = MutableLiveData()
+    val dataLive: LiveData<List<HistoryEntity>> = data
+
     @Inject
     lateinit var cardInfoUseCase: GetCardInfoUseCase
 
@@ -55,20 +59,27 @@ class BINViewModel(application: Application): ViewModel() {
         (application as App).appComponent.inject(this)
     }
 
-    fun startJob(){
+    fun startJobGetInfo() {
         val jobGetCardInfo: Job = GlobalScope.launch(Dispatchers.IO) {
             getCardInfo()
         }
         jobGetCardInfo.start()
     }
 
+    fun startJobClear() {
+        val job: Job = GlobalScope.launch(Dispatchers.IO) {
+            clearAllHistory()
+        }
+        job.start()
+    }
+
     //получение данных карты
-    suspend fun getCardInfo() = coroutineScope{
+    suspend fun getCardInfo() = coroutineScope {
         launch {
             isCardInfoLoading.postValue(true)
 
             bin.value?.toInt().let {
-                cardInfoUseCase(it!!).enqueue(object : Callback<CardInfo>{
+                cardInfoUseCase(it!!).enqueue(object : Callback<CardInfo> {
                     override fun onResponse(call: Call<CardInfo>, response: Response<CardInfo>) {
                         cardInfo.postValue(response.body())
                         isCardInfoLoading.postValue(false)
@@ -90,25 +101,40 @@ class BINViewModel(application: Application): ViewModel() {
     //определение текущей страницы навигации
     fun bottomNavItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.page_1 -> botNavPage.value = 1
             R.id.page_2 -> botNavPage.value = 2
-
         }
         return true
     }
 
     //обработка нажатия на ссылку
-    fun linkClicked(){
+    fun linkClicked() {
         link.value = cardInfo.value?.bank?.url
     }
 
     //обработка нажатия на номер телефона
-    fun phoneClicked(){
+    fun phoneClicked() {
         phone.value = cardInfo.value?.bank?.phone
     }
 
     //обработка нажатия на координаты страны
-    fun coordsClicked(){
+    fun coordsClicked() {
         coords.value = cardInfo.value?.country?.latitude.toString() +
                 "," + cardInfo.value?.country?.longitude.toString()
+    }
+
+    //получить историю запросов
+    suspend fun getHistory() = coroutineScope {
+        launch {
+            data.postValue(localRepository.getAllHistory())
+        }
+    }
+
+    //очистить историю запросов
+    suspend fun clearAllHistory() = coroutineScope {
+        launch {
+            localRepository.clearAllHistory()
+            data.postValue(emptyList())
+        }
     }
 }

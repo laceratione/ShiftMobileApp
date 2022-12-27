@@ -7,6 +7,8 @@
         <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/drawable/style_history_item.xml" value="0.23333333333333334" />
         <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/layout/activity_history.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/layout/fragment_bin.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/layout/fragment_history.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/layout/history_item.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/ShiftMobile/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2171875" />
       </map>
